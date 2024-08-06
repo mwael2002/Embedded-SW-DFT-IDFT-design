@@ -6,9 +6,11 @@
 #### Third: Implementation of IDFT algorithm and applying it on the output of DFT then plotting output of IDFT same as the previous ways.
 #### Hardware: STM32 Nucleo board
 #### Drivers used: FPU and USART.
-### An example of signal have 1KHz & 15KHz freq. components:
+### An example of signal has 1KHz & 15KHz freq. components:
 #### 1- Input Signal
 ![Alt text](https://github.com/mwael2002/Embedded-SW-DFT-IDFT-design/blob/main/Screenshot%202024-08-06%20175017.png)
 #### 2- DFT Output:
 ![Alt text](https://github.com/mwael2002/Embedded-SW-DFT-IDFT-design/blob/main/Screenshot%202024-08-06%20175419.png)
+#### Note: The x-axis isn't correct as arduino plotter puts it by itself
 #### 3- IDFT Output:
+![Alt text](https://github.com/mwael2002/Embedded-SW-DFT-IDFT-design/blob/main/Screenshot%202024-08-06%20175702.png)
