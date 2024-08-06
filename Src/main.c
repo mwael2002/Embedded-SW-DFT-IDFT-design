@@ -12,7 +12,7 @@ float32_t g_in_sig_sample;
 
 
 extern float32_t _5hz_signal[LENGTH_SIGNAL_5HZ];
-extern float32_t inputSignal_f32_1kHz_15kHz[LENGTH_SIGNAL_1KHZ_32KHZ];
+extern float32_t inputSignal_f32_1kHz_15kHz[LENGTH_SIGNAL_1KHZ_15KHZ];
 extern float32_t _signal_ecg[LENGTH_SIGNAL_ECG];
 
 void get_dft_output_mag(float32_t* real_sig,float32_t* img_sig,float32_t* out_sig,uint16_t sig_length);
@@ -26,22 +26,11 @@ void pseuodo_delay(uint32_t delay);
 
 uint8_t counter=0;
 
-void SysTick_Handler(void)
-{
-	counter+=1;
-if(counter==6){
-
-	GPIOA->BSRR = (get_bit(GPIOA->BSRR,5)^1)<<5;
-	counter=0;
-
-}
-
-}
 
 int main(void)
 {
 
-	 uint16_t length_sig=LENGTH_SIGNAL_ECG;
+	 uint16_t length_sig=LENGTH_SIGNAL_1KHZ_15KHZ;
 
 	 float32_t real_sig[length_sig];
 	 float32_t img_sig[length_sig];
@@ -52,15 +41,15 @@ int main(void)
 	 USART_TX_init();
 
 
-	  //calc_sig_dft(_signal_ecg,real_sig,img_sig,length_sig);
-	  //get_dft_output_mag(real_sig, img_sig, out_sig,length_out_sig);
-	  //calc_sig_idft(real_sig,img_sig,out_sig,length_sig);
+	  calc_sig_dft(inputSignal_f32_1kHz_15kHz,real_sig,img_sig,length_sig);
+	  get_dft_output_mag(real_sig, img_sig, out_sig,length_sig);
+	  calc_sig_idft(real_sig,img_sig,out_sig,length_sig);
 
 
       while(1){
 
 
-     plot_signal_UART(_signal_ecg,length_sig);
+     plot_signal_UART(out_sig,length_sig);
 
 	}
 }
